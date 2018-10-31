@@ -6,11 +6,10 @@ public class Starter{
 
 	public Starter(){
 		engine = new Engine();
-		engine.start();
+		engine.start();		
 	}
 	
 	public static void main(String[] args) {
 		new Starter();
 	}
-	
 }
