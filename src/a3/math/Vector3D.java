@@ -19,7 +19,7 @@ public class Vector3D {
 		this.z = z;
 	}
 	
-	/**  TODO The methods below will mutate the instance as well as return it **/
+	/**  The methods below will mutate the instance as well as return it **/
 	
 	public Vector3D normalize() {
 		float temp = this.mag(); //store initial magnitude of vector to divide x,y,z
@@ -36,12 +36,7 @@ public class Vector3D {
 		return this;
 	}
 	
-	/**  TODO The methods below will NOT mutate the instance and return new Vector3D **/
-	
-	public Vector3D mult(Vector3D vec2) {
-		return null;
-	}
-	
+	/**  The methods below will NOT mutate the instance and return new Vector3D **/
 	public Vector3D add(Vector3D vec2) {
 		Vector3D result = new Vector3D();
 		result.setX(this.x + vec2.getX());
@@ -56,10 +51,6 @@ public class Vector3D {
 		result.setY(this.y - vec2.getY());
 		result.setZ(this.z - vec2.getZ());
 		return result;
-	}
-	
-	public Vector3D div(Vector3D vec2) {
-		return null;
 	}
 	
 	public float dot(Vector3D vec2) {
@@ -127,7 +118,7 @@ public class Vector3D {
 		this.z = z;
 	}
 	
-	/**  Helper functions for math functions  **/
+	/**  Helper function for finding magnitude  **/
 	private float sumOfSquares(float x, float y, float z) {
 		float sumOfSquares = (x*x + y*y + z*z);		
 		return sumOfSquares;
