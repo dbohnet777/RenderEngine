@@ -62,20 +62,23 @@ public class Vector3D {
 		return null;
 	}
 	
-	public Vector3D dot(Vector3D vec2) {
-		return null;
+	public float dot(Vector3D vec2) {
+		float dot = ((this.getX() * vec2.getX()) + (this.getY() * vec2.getY()) + (this.getZ() * vec2.getZ()));
+		return dot;
 	}
 	
 	public Vector3D cross(Vector3D vec2) {
-		return null;
+		float xX, xY, xZ;
+		xX = ((this.getY() * vec2.getZ()) - (this.getZ() * vec2.getY()));
+		xY = ((this.getZ() * vec2.getX()) - (this.getX() * vec2.getZ()));
+		xZ = ((this.getX() * vec2.getY()) - (this.getY() * vec2.getX()));
+		Vector3D cross = new Vector3D(xX, xY, xZ);
+		return cross;
 	}
 	
 	/**  The magnitude function takes the current vector and returns it's magnitude as a float value **/
 	public float mag() {
-		float temp = 0.0f;
-		float mag = temp;
-		temp = sumOfSquares(x, y, z);
-		mag = (float) Math.sqrt(temp);
+		float mag = (float) Math.sqrt(sumOfSquares(x, y, z));
 		return mag;
 	}
 	
@@ -108,13 +111,11 @@ public class Vector3D {
 		return "Vector -> (" + this.x + ", "  + this.y + ", " + this.z + ") magnitude = " + mag();
 	}
 	
-	/** TODO other methods that do not mutate or return instances of the Vector class **/
 	public float angleBetween(Vector3D vec2) {
-		// https://www.wikihow.com/Find-the-Angle-Between-Two-Vectors
-		return 1;
+		float angle = 0.0f;
+		angle = (float) Math.acos(((this.x * vec2.getX()) + (this.y * vec2.getY()) + (this.z * vec2.getZ())) / (this.mag() * vec2.mag()));
+		return angle;
 	}
-	
-	/**  The Methods below are done  **/
 	
 	public float[] getDirection() {
 		return new float[] {x, y, z};
