@@ -28,15 +28,16 @@ public class Engine extends JFrame implements GLEventListener{
 	private int vao[] = new int[1];
 	
 	private ErrorChecking errorChecking;
-	private Vector3D test1, test2, test3; //vectors for testing
+	//private Vector3D test1, test2, test3; //vectors for testing
 	public Engine() {
+		GL4 gl = (GL4) GLContext.getCurrentGL();	
 		setTitle("Assignment #3");
 		setSize(1000, 1000);
 		myCanvas = new GLCanvas();
 		myCanvas.addGLEventListener(this);
 		getContentPane().add(myCanvas);
 		setVisible(true);
-		errorChecking = new ErrorChecking();
+		errorChecking = new ErrorChecking(gl);
 		errorChecking.checkOpenGLError();
 	}
 
@@ -61,28 +62,10 @@ public class Engine extends JFrame implements GLEventListener{
 		gl.glGenVertexArrays(vao.length, vao, 0);
 		gl.glBindVertexArray(vao[0]);
 		
-
+		//****** print the current running versions ********//
 		System.out.println("OpenGL Version: " + gl.glGetString(GL.GL_VERSION));
 		System.out.println("JOGL Version: " + Package.getPackage("com.jogamp.opengl").getImplementationVersion());
 		System.out.println("Java Version: " + System.getProperty("java.version"));
-		
-		//*************************************************VECTOR TESTING**************************************//
-		
-		test1 = new Vector3D(7.0f, 3.0f, -4.0f);
-		test2 = new Vector3D(1.0f, 0.0f, 6.0f);
-		test3 = new Vector3D();
-		System.out.println(test1.toString());
-		test3 = test1.add(test2);
-		System.out.println(test3.toString());
-		test3 = test1.sub(test2);
-		System.out.println(test3.toString());
-		System.out.println("The angle between the two vectors is: " + test1.angleBetween(test2));
-		test3 = test1.cross(test2);
-		System.out.println("the cross product is " + test3.toString());
-		test1.normalize();
-		System.out.println(test1.toString());
-		
-		//*********************************************END VECTOR TESTING**************************************//
 	}
 
 	@SuppressWarnings("static-access")

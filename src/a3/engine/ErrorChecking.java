@@ -7,11 +7,11 @@ import com.jogamp.opengl.GLContext;
 import com.jogamp.opengl.glu.GLU;
 
 public class ErrorChecking {
-	public ErrorChecking() {
-		
+	private GL4 gl;
+	public ErrorChecking(GL4 gl) {
+		this.gl = gl;
 	}
 	public void printShaderLog(int shader) {
-		GL4 gl = (GL4) GLContext.getCurrentGL();	
 		int[] len = new int[1];
 		int[] chWritten = new int[1];
 		byte[] log = null;
@@ -27,8 +27,7 @@ public class ErrorChecking {
 			}
 		}
 	}
-	public void printProgramLog(int prog) {
-		GL4 gl = (GL4) GLContext.getCurrentGL();	
+	public void printProgramLog(int prog) {	
 		int[] len = new int[1];
 		int[] chWritten = new int[1];
 		byte[] log = null;
@@ -44,7 +43,6 @@ public class ErrorChecking {
 		}
 	}
 	public boolean checkOpenGLError() {
-		GL4 gl = (GL4) GLContext.getCurrentGL();	
 		boolean foundError = false;
 		GLU glu = new GLU();
 		int glErr = gl.glGetError();
