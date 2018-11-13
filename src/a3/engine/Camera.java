@@ -1,6 +1,7 @@
 package a3.engine;
 
 import a3.math.Matrix;
+import a3.math.Vector3D;
 
 public class Camera {
 	private Matrix viewMatrix;
