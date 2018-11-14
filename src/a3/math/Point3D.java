@@ -103,6 +103,20 @@ public class Point3D {
 		this.z += z;
 	}
 	
+	public void setLocation(float x, float y, float z, float w) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.w = w;
+	}
+	
+	public void setLocation(Point3D point) {
+		this.x = point.getX();
+		this.y = point.getY();
+		this.z = point.getZ();
+		this.w = point.getW();
+	}
+	
 	/** The methods below do not mutate or return a Point3D **/
 	public boolean equals(Point3D point) {
 		if(this.x == point.getX() && this.y == point.getY() && this.z == point.getZ() && this.w == point.getW()) {
@@ -118,6 +132,11 @@ public class Point3D {
 		Vector3D temp = new Vector3D(x, y, z);
 		float distance = temp.getMagnitude();
 		return distance;
+	}
+	
+	public Vector3D vectorTo(Point3D point) {
+		
+		return new Vector3D();
 	}
 	
 	public float getX() {
@@ -153,6 +172,6 @@ public class Point3D {
 	}
 	
 	public String toString() {
-		return "(X, Y, Z, W) = " + " (" + this.x + ", " + this.y + ", " + this.z + ", " + this.w + ")";
+		return "(X, Y, Z, W) = " + "(" + this.x + ", " + this.y + ", " + this.z + ", " + this.w + ")";
 	}
 }

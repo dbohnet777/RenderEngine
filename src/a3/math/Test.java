@@ -27,6 +27,15 @@ public class Test {
         float degrees = (float) Math.toRadians(34.75);
         Matrix mat5 = mat1.createRotationMatrix(degrees, vec4);
         System.out.println(mat5);
-       
+        
+        Point3D point1 = new Point3D(1.3f, 1.2f, 1.1f, 4.6f);
+        Point3D point4 = new Point3D(1.3f, 1.2f, 1.1f, 4.6f);
+        System.out.println(point1);
+        
+        Point3D point2 = new Point3D(2.3f, 4.2f, 3.1f, 2.6f);
+        System.out.println(point2);
+        Point3D point3 = point1.sub(point2);
+        System.out.println(point3);
+        System.out.println(point1.distanceBetween(point4));
     }
 }
