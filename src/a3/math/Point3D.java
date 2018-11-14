@@ -57,6 +57,51 @@ public class Point3D {
 		return new Point3D(x, y, z);
 	}
 	
+	public Point3D mult(float value) {
+		float x = this.x * value;
+		float y = this.y * value;
+		float z = this.z * value;
+		return new Point3D(x, y, z);
+	}
+	
+	public Point3D divide(float value) {
+		float x = this.x / value;
+		float y = this.y / value;
+		float z = this.z / value;
+		return new Point3D(x, y, z);
+	}
+	
+	public Point3D midpoint(Point3D point2) {
+		float x = (this.x + point2.getX()) / 2;
+		float y = (this.y + point2.getY()) / 2;
+		float z = (this.z + point2.getZ()) / 2;
+		return new Point3D(x, y, z);
+	}
+	
+	/** The methods below mutate the current Point3D **/
+	public void scale(float value) {
+		this.x *= value;
+		this.y *= value;
+		this.z *= value;
+	}
+	
+	/** The methods below do not mutate or return a Point3D **/
+	public boolean equals(Point3D point) {
+		if(this.x == point.getX() && this.y == point.getY() && this.z == point.getZ() && this.w == point.getW()) {
+			return true;
+		}
+		else return false;
+	}
+	
+	public float distanceBetween(Point3D point) {
+		float x = this.x - point.getX();
+		float y = this.y - point.getY();
+		float z = this.z - point.getZ();
+		Vector3D temp = new Vector3D(x, y, z);
+		float distance = temp.getMagnitude();
+		return distance;
+	}
+	
 	public float getX() {
 		return this.x;
 	}
@@ -88,8 +133,8 @@ public class Point3D {
 	public void setW(float w) {
 		this.w = w;
 	}
-
 	
-	
-	
+	public String toString() {
+		return "(X, Y, Z, W) = " + " (" + this.x + ", " + this.y + ", " + this.z + ", " + this.w + ")";
+	}
 }
