@@ -11,8 +11,7 @@ public class Matrix {
                 {1.0f, 0.0f, 0.0f, 0.0f},
                 {0.0f, 1.0f, 0.0f, 0.0f},
                 {0.0f, 0.0f, 1.0f, 0.0f},
-                {0.0f, 0.0f, 0.0f, 1.0f}
-        };
+                {0.0f, 0.0f, 0.0f, 1.0f}};
 	}
 
 	public Matrix(float[][] matrix) {
@@ -20,8 +19,7 @@ public class Matrix {
 			{matrix[0][0], matrix[0][1], matrix[0][2], matrix[0][3]},
 			{matrix[1][0], matrix[1][1], matrix[1][2], matrix[1][3]},
 			{matrix[2][0], matrix[2][1], matrix[2][2], matrix[2][3]},
-			{matrix[3][0], matrix[3][1], matrix[3][2], matrix[3][3]}
-		};
+			{matrix[3][0], matrix[3][1], matrix[3][2], matrix[3][3]}};
 	}
 
     public Matrix(float[] matrix) {
@@ -29,8 +27,7 @@ public class Matrix {
                 {matrix[0],  matrix[1],  matrix[2],  matrix[3]},
                 {matrix[4],  matrix[5],  matrix[6],  matrix[7]},
                 {matrix[8],  matrix[9],  matrix[10], matrix[11]},
-                {matrix[12], matrix[13], matrix[14], matrix[15]}
-        };
+                {matrix[12], matrix[13], matrix[14], matrix[15]}};
     }
 
     public Matrix(Vector3D xVec, Vector3D yVec, Vector3D zVec) {
@@ -38,8 +35,7 @@ public class Matrix {
                 {xVec.getX(), xVec.getY(), xVec.getZ(), 0},
                 {yVec.getX(), yVec.getY(), yVec.getZ(), 0},
                 {zVec.getX(), zVec.getY(), zVec.getZ(), 0},
-                {    0,           0,           0,       1}
-            };
+                {    0,           0,           0,       1}};
 	};
 
     public Matrix createRotationMatrix(float degrees, Vector3D axis) {
@@ -95,8 +91,7 @@ public class Matrix {
                 {amtX,  0,   0,  0},
                 {  0, amtY,  0,  0},
                 {  0,   0, amtZ, 0},
-                {  0,   0,   0,  1}
-        };
+                {  0,   0,   0,  1}};
         return this;
 	}
 
@@ -105,8 +100,7 @@ public class Matrix {
                 {1, 0, 0, amtX},
                 {0, 1, 0, amtY},
                 {0, 0, 1, amtZ},
-                {0, 0, 0,   1 }
-        };
+                {0, 0, 0,   1 }};
         return this;
     }
 
@@ -121,8 +115,7 @@ public class Matrix {
                 {  A,  0.0f,  0.0f, 0.0f},
                 {0.0f,   q,   0.0f, 0.0f},
                 {0.0f, 0.0f,    B,    C },
-                {0.0f, 0.0f, -1.0f, 0.0f}
-        };
+                {0.0f, 0.0f, -1.0f, 0.0f}};
         return this;
     }
 
