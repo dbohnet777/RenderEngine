@@ -10,7 +10,16 @@ public class Camera {
 	private Matrix viewMatrix;
 	
 	public Camera(float x, float y, float z) {
+		Vector3D yAxis = new Vector3D(0.0f, 1.0f, 0.0f);
+		Vector3D temp = new Vector3D();
+		
 		this.camLoc = new Point3D(x, y, z);
+		this.n = this.getForwardVector().normalize().inverseVector();
+		temp = n.cross(yAxis);
+		this.u = temp.normalize();
+		temp = u.cross(n);
+		this.v = temp.normalize();
+		
 	}
 	
 	public Vector3D getForwardAxis() {
@@ -25,8 +34,15 @@ public class Camera {
 		return u;
 	}
 	
+	public Vector3D getForwardVector() {
+		float x = camLoc.getX() - lookAt.getX();
+		float y = camLoc.getY() - lookAt.getY();
+		float z = camLoc.getZ() - lookAt.getZ();
+		return new Vector3D(x, y, z);
+	}
+	
 	public Point3D getLocation() {
-		return camLoc;
+		return this.camLoc;
 	}
 	
 	public void setLocation(Point3D newLoc) {

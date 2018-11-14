@@ -134,11 +134,6 @@ public class Point3D {
 		return distance;
 	}
 	
-	public Vector3D vectorTo(Point3D point) {
-		
-		return new Vector3D();
-	}
-	
 	public float getX() {
 		return this.x;
 	}

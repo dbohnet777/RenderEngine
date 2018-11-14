@@ -25,7 +25,6 @@ public class Vector3D {
 	}
 
 	/**  The methods below will mutate the instance as well as return it **/
-	
 	public Vector3D normalize() {
 		this.setDirection(this.x / this.getMagnitude(), this.y / this.getMagnitude(),	this.z / this.getMagnitude());
 		return this;
@@ -62,6 +61,13 @@ public class Vector3D {
 		float y = this.z * vec2.getX() - this.x * vec2.getZ();
 		float z = this.x * vec2.getY() - this.y * vec2.getX();
 		return new Vector3D(x, y, z);
+	}
+	
+	public Vector3D inverseVector() {
+		float nX = this.x * -1.0f;
+		float nY = this.y * -1.0f;
+		float nZ = this.z * -1.0f;
+		return new Vector3D(nX, nY, nZ);
 	}
 	
 	public float getMagnitude() {
