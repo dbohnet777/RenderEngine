@@ -85,6 +85,24 @@ public class Point3D {
 		this.z *= value;
 	}
 	
+	public void translateX(float value) {
+		this.x += value;
+	}
+	
+	public void translateY(float value) {
+		this.y += value;
+	}
+	
+	public void translateZ(float value) {
+		this.z += value;
+	}
+	
+	public void translate(float x, float y, float z) {
+		this.x += x;
+		this.y += y;
+		this.z += z;
+	}
+	
 	/** The methods below do not mutate or return a Point3D **/
 	public boolean equals(Point3D point) {
 		if(this.x == point.getX() && this.y == point.getY() && this.z == point.getZ() && this.w == point.getW()) {
