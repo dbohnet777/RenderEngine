@@ -20,6 +20,7 @@ public class Camera {
 		temp = u.cross(n);
 		this.v = temp.normalize();
 		
+		this.viewMatrix = viewMatrix.createCameraMatrix(n, u, camLoc);
 	}
 	
 	public Vector3D getForwardAxis() {
@@ -43,6 +44,10 @@ public class Camera {
 	
 	public Point3D getLocation() {
 		return this.camLoc;
+	}
+	
+	public void setUVNAxis() {
+		
 	}
 	
 	public void setLocation(Point3D newLoc) {

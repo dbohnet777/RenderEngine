@@ -126,18 +126,22 @@ public class Matrix {
         return this;
     }
 
-    public Matrix createCameraMatrix(Vector3D forward, Vector3D up) {
+    public Matrix createCameraMatrix(Vector3D forward, Vector3D up, Point3D camLoc) {
     	Vector3D n = forward.normalize();
     	Vector3D u = up.normalize();
     	u = u.cross(n);
     	Vector3D v = n.cross(u);
+    	float eX = camLoc.getX();	float eY = camLoc.getY();	float eZ = camLoc.getZ();
+    	float uX = u.getX();	float uY = u.getY();	float uZ = u.getZ();
+    	float vX = v.getX();	float vY = v.getY();	float vZ = v.getZ();
+    	float nX = n.getX();	float nY = n.getY();	float nZ = n.getZ();
     	
     	//set the vectors to the matrix now
         this.values = new float[][] {
-                {u.getX(), v.getX(), n.getX(), 0},
-                {u.getY(), v.getY(), n.getY(), 0},
-                {u.getZ(), v.getZ(), n.getZ(), 0},
-                {    0,        0,        0,    1}};
+                {uX, uY, uZ, -(eX*uX + eY*uY + eZ*uZ)},
+                {vX, vY, vZ, -(eX*vX + eY*vY + eZ*vZ)},
+                {nX, nY, nZ, -(eX*nX + eY*nY + eZ*nZ)},
+                {0,   0,  0,            1			}};
         return this;
     }
 
