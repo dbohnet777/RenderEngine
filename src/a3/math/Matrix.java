@@ -46,22 +46,21 @@ public class Matrix {
     	float uY = axis.getY();
     	float uZ = axis.getZ();
     	
-    	float[][] values = new float[][] {
+    	this.values = new float[][] {
             {(cos + uX*uX*mCT),    (uX*uY*mCT - uZ*sin), (uX*uZ*mCT + uY*sin), 0.0f},
             {(uY*uX*mCT + uZ*sin), (cos + uY*uY*mCT),    (uY*uZ*mCT - uX*sin), 0.0f},
             {(uZ*uX*mCT - uY*sin), (uZ*uY*mCT + uX*sin), (cos + uZ*uZ*mCT),    0.0f},
             {		0.0f, 				   0.0f,				 0.0f,		   1.0f}};
-	    Matrix rotationMatrix = new Matrix(values);
-	    return rotationMatrix;
+	    return this;
 	}
 
 	public Matrix createRotationMatrix(float amtX, float amtY, float amtZ) {
 		float cosX = (float) Math.cos(amtX);
-		float sinX = (float)Math.sin(amtX);
+		float sinX = (float) Math.sin(amtX);
 		float cosY = (float) Math.cos(amtY);
-		float sinY = (float)Math.sin(amtY);
+		float sinY = (float) Math.sin(amtY);
 		float cosZ = (float) Math.cos(amtZ);
-		float sinZ = (float)Math.sin(amtZ);
+		float sinZ = (float) Math.sin(amtZ);
 		
         float[][] valuesX = new float[][] {
         	{1.0f, 0,0f, 0.0f, 0.0f},
@@ -82,9 +81,14 @@ public class Matrix {
 		Matrix rotX = new Matrix(valuesX);
 		Matrix rotY = new Matrix(valuesY);
 		Matrix rotZ = new Matrix(valuesZ);
-		Matrix rotationMatrix = new Matrix().mult(rotX).mult(rotY).mult(rotZ);
-		return rotationMatrix;
-	}
+		Matrix result = new Matrix().mult(rotX).mult(rotY).mult(rotZ);
+		float temp[] = result.getValues();
+		this.values = new float[][]{{temp[0], temp[1], temp[2], temp[3]},
+                                    {temp[4], temp[5], temp[6], temp[7]},
+                                    {temp[8], temp[9], temp[10], temp[11]},
+                                    {temp[12], temp[13], temp[14], temp[15]}};
+		return this;
+    }
 
     public Matrix createScalingMatrix(float amtX, float amtY, float amtZ) {
         this.values = new float[][] {

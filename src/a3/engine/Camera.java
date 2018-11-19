@@ -8,87 +8,45 @@ public class Camera {
 	private Vector3D u, v, n;
 	private Point3D camLoc, lookAt;
 	private Matrix viewMatrix;
-	private float inc;
-	private float rotation;
+	private float inc = 0.125f;
+	private float rotation = 0.125f;
 	
 	//Instantiate camera directly behind origin directed at origin
 	public Camera() {
-		Vector3D worldUp = new Vector3D(0.0f, 1.0f, 0.0f);
-		Vector3D temp = new Vector3D();
-		inc = 0.125f; rotation = 0.125f;
 		this.camLoc = new Point3D(0.0f, -1.0f, 0.0f);
 		this.lookAt = new Point3D();
-		this.n = this.getForwardVector().normalize().inverseVector();
-		temp = n.cross(worldUp);
-		this.u = temp.normalize();
-		temp = u.cross(n);
-		this.v = temp.normalize();
-		
-		this.viewMatrix = viewMatrix.createCameraMatrix(n, u, camLoc);
+        calculateUVN();
+		setViewMatrix();
 	}
 	
 	//Instantiate camera at given location directed at origin
 	public Camera(float x, float y, float z) {
-		Vector3D worldUp = new Vector3D(0.0f, 1.0f, 0.0f);
-		Vector3D temp = new Vector3D();
-		inc = 0.125f; rotation = 0.125f;
 		this.camLoc = new Point3D(x, y, z);
 		this.lookAt = new Point3D();
-		this.n = this.getForwardVector().normalize().inverseVector();
-		temp = n.cross(worldUp);
-		this.u = temp.normalize();
-		temp = u.cross(n);
-		this.v = temp.normalize();
-		
-		this.viewMatrix = viewMatrix.createCameraMatrix(n, u, camLoc);
+		calculateUVN();
+		setViewMatrix();
 	}
 	
 	public Camera(Point3D cameraPoint) {
-		Vector3D worldUp = new Vector3D(0.0f, 1.0f, 0.0f);
-		Vector3D temp = new Vector3D();
-		inc = 0.125f; rotation = 0.125f;
 		this.camLoc = cameraPoint;
 		this.lookAt = new Point3D();
-		this.n = this.getForwardVector().normalize().inverseVector();
-		temp = n.cross(worldUp);
-		this.u = temp.normalize();
-		temp = u.cross(n);
-		this.v = temp.normalize();
-		
-		this.viewMatrix = viewMatrix.createCameraMatrix(n, u, camLoc);
+        calculateUVN();
+        setViewMatrix();
 	}
 	
 	//Instantiate camera at given location directed at given location
 	public Camera(float xC, float yC, float zC, float xL, float yL, float zL) {
-		Vector3D worldUp = new Vector3D(0.0f, 1.0f, 0.0f);
-		Vector3D temp = new Vector3D();
-		inc = 0.125f; rotation = 0.125f;
 		this.camLoc = new Point3D(xC, yC, zC);
 		this.lookAt = new Point3D(xL, yL, zL);
-	
-		this.n = this.getForwardVector().normalize().inverseVector();
-		temp = n.cross(worldUp);
-		this.u = temp.normalize();
-		temp = u.cross(n);
-		this.v = temp.normalize();
-		
-		this.viewMatrix = viewMatrix.createCameraMatrix(n, u, camLoc);
+	    calculateUVN();
+        setViewMatrix();
 	}
 	
 	public Camera(Point3D cameraPoint, Point3D lookAtPoint) {
-		Vector3D worldUp = new Vector3D(0.0f, 1.0f, 0.0f);
-		Vector3D temp = new Vector3D();
-		inc = 0.125f; rotation = 0.125f;
 		this.camLoc = cameraPoint;
 		this.lookAt = lookAtPoint;
-	
-		this.n = this.getForwardVector().normalize().inverseVector();
-		temp = n.cross(worldUp);
-		this.u = temp.normalize();
-		temp = u.cross(n);
-		this.v = temp.normalize();
-		
-		this.viewMatrix = viewMatrix.createCameraMatrix(n, u, camLoc);
+		calculateUVN();
+		setViewMatrix();
 	}
 	
 	public Vector3D getForwardAxis() {
@@ -109,6 +67,21 @@ public class Camera {
 		float z = camLoc.getZ() - lookAt.getZ();
 		return new Vector3D(x, y, z);
 	}
+
+	public void calculateUVN(){
+        Vector3D worldUp = new Vector3D(0.0f, 1.0f, 0.0f);
+        Vector3D temp = new Vector3D();
+        this.n = this.getForwardVector().normalize().inverseVector();
+        temp = n.cross(worldUp);
+        this.u = temp.normalize();
+        temp = u.cross(n);
+        this.v = temp.normalize();
+    }
+
+    public void setViewMatrix(){
+	    this.viewMatrix = new Matrix().createCameraMatrix(n, u, camLoc);
+    }
+
 	
 	public Point3D getLocation() {
 		return this.camLoc;
@@ -123,9 +96,9 @@ public class Camera {
 	}
 	
 	public void moveForward() {
-		Matrix forwardMatrix = viewMatrix.createTranslationMatrix(0.0f, 0.0f, inc);
-		viewMatrix = viewMatrix.mult(forwardMatrix);
-	}
+	    /* TODO fuckin look at this */
+	    //this.camLoc = this.u.normalize().scale(inc);
+    }
 	
 	public void moveBackward() {
 		Matrix backwardMatrix = viewMatrix.createTranslationMatrix(0.0f, 0.0f, -inc);
@@ -158,8 +131,7 @@ public class Camera {
 	}
 	
 	public void yawRight() {
-		Matrix yawRightMatrix = viewMatrix.createRotationMatrix(-rotation, v);
-		viewMatrix = viewMatrix.mult(yawRightMatrix);
+
 	}
 	
 	public void pitchUp() {
@@ -168,8 +140,9 @@ public class Camera {
 	}
 	
 	public void pitchDown() {
-		Matrix pitchDownMatrix = viewMatrix.createRotationMatrix(-rotation, u);
-		viewMatrix = viewMatrix.mult(pitchDownMatrix);
+		Vector3D pitchDownVector = this.getForwardVector();
+		pitchDownVector.setY(pitchDownVector.getY() - inc);
+
 	}
 	
 	public Matrix getViewMatrix() {
