@@ -95,7 +95,7 @@ public class Engine extends JFrame implements GLEventListener{
 		camX = 0.0f; camY = 0.0f; camZ = 8.0f;
 		cLocX = 0.0f; cLocY = -2.0f; cLocZ = 0.0f;
 
-		float aspect = (float) myCanvas.getWidth()/(float)myCanvas.getHeight();
+			float aspect = (float) myCanvas.getWidth()/(float)myCanvas.getHeight();
 		pMat = perspective(60.0f, aspect, 0.1f, 1000.f);
 	}
 
